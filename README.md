@@ -7,8 +7,8 @@ A document that NSA uses for teaching Python was obtained via a FOIA request, pe
 The document is available for download [here](https://archive.org/details/comp3321/mode/1up) in various formats.  
   
 ## Exercises:
-[### Lesson 01: Introduction](../blob/master/Lesson_01/)  
-[### Lesson 02: Variables and Functions](..blob/master/Lesson_02/)  
-[### Lesson 03: Flow Control](..blob/master/Lesson_03/)  
-[### Lesson 04: Container Data Types](..blob/master/Lesson_04/)  
+[**Lesson 01: Introduction**](../master/Lesson_01/)  
+[**Lesson 02: Variables and Functions**](../master/Lesson_02/)  
+[**Lesson 03: Flow Control**](../master/Lesson_03/)  
+[**Lesson 04: Container Data Types**](../master/Lesson_04/)  
 
