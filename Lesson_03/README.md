@@ -31,7 +31,8 @@ def even(n):
 ### The while Loop
 The `while` is used for repeated operations that continue as long as an expression is true. The famous infinite loop:  
 ```python
-while(2+2==4):print('forever'
+while(2+2==4):
+	print('forever')
 ```
 
 ### break and continue
