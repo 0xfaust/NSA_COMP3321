@@ -28,8 +28,7 @@ fruit.pop()
 ```
 
 ## List Comprehension
-One of the most common uses of a list is to iterate over its elements with a `for` loop, storing off the results of each iteration in a new list. Python removes the repetitive boilerplate code from this type of procedure with **listcomprehensions**.
-`d = [[i, i ** 2, i ** 3] for i in range(10) if i % 2]`
+One of the most common uses of a list is to iterate over its elements with a `for` loop, storing off the results of each iteration in a new list. Python removes the repetitive boilerplate code from this type of procedure with **list comprehensions**.  `d = [[i, i ** 2, i ** 3] for i in range(10) if i % 2]`
 
 ## Sorting and Reordering
 The `sorted` function works on more than just lists, but always returns a new list with the same contents as the original in sorted order. There is also a `sort` method on lists that performs an in-place sort.
@@ -69,4 +68,56 @@ different_animals[0] == animals[0]
 
 ## Dictionaries
 A `dict` is a container that associates keys with values. The keys of a `dict` must be unique, and only immutable objects can be keys. Values can be any type. The dictionary construction shortcut uses curly braces { } with a colon : between keys and values (e.g. `my_dict = {key: value, keyl: value1))`. Alternate constructors are available using the `dict` keyword. Values can be added, changed, or retrieved using index notation with *keys* instead of *index* numbers. Some of the operators, functions, and methods that work on sequences also work with dictionaries.
+```python
+bugs = {"ant": 10, "prayingmantis": 0}
+bugs['fly'] = 5
+bugs.update({'spider': 1})
+del bugs['spider']
+'fly' in bugs
+```
+
+Dictionaries have several additional methods specific to their structure. Methods that return lists, like `items`, `keys`, and `values`, are not guaranteed to do so in any particular order, but may be in consistent order if no modifications are made to the dictionary in between the calls. The `get` method is often preferable to index notation because it does not raise an error when the requested key is not found; instead, it returns `None` by default, or a default value that is passed as a second argument.
+
+```python
+bugs.items()
+bugs.keys()
+bugs.values()
+bugs.get('fly')
+```
+
+## Sets and Frozensets
+A `set` is a container that can only hold unique objects. Adding something that’s already there will do nothing (but cause no error). Elements of a set must be immutable (like keys in a dictionary). The `set` and `frozenset` constructors take any iterable as an argument, whether it's a `list`, `tuple`, or otherwise. Curly braces {} around a list of comma-separated values can be used in Python2.7 and later as a shortcut constructor, but that could causeconfusion with the `dict` shortcut. Two sets are equal if they contain the same items, regard less of order.
+```python 
+numbers = set([l,1,1,1,1,3,3,3,3,3,2,2,2,3,3,4])
+numbers.add(4)
+numbers.update([3,4,7])
+numbers.pop()
+numbers.remove(7)
+numbers.discard(7)
+```
+A frozen set is constructed in a similar way; the only difference is in the mutability. This makes frozen sets suitable as dictionary keys, but frozen sets are uncommon.  
+`a = frozenset([l,l,l,l,l,3,3,3,3,32,2,2,3,3,4])`
+  
+Sets adopt the notation of bitwise operators for set operations like union, intersection, and symmetric difference. This is similar to how the `+` operator isused for concatenating lists and tuples.
+```python
+house_pets = {'dog', 'cat', 'fish'}
+farm_animals = {'cow', 'sheep’, 'pig', 'dog', 'cat'}
+house_pets & farm_animals # intersection
+house_pets | farm_animals # union
+house_pets ^ farm_animals # symmetric difference
+house_pets - farm_animals # asymmetric difference
+```
+There are verbose set methods that do the same thing, but with two important difference: they accept lists, tuples, and other iterables as arugments, and can be used to update the set in place. Comparison of sets is similar: operators can be used to compare two sets, while methods can be used to compare sets with other iterables. Unlike numbers or strings, sets are often incomparable.
+
+## Coda: More Built-In Functions
+We've seen how some built-in functions operate on one or two of these container types, but all of the following can be applied to any container, although they probably won't always work; that depends on the contents of the container. There are some caveats:
+* When passed a dictionary as an argument, these functions look at the keys of the dictionary, not the values.
+* The `any` and `all` functions use the boolean context of the values of the container, e.g. `0` is `False` and non-zero numbers are `True`, and all strings are `True` except for the empty string `''`, which is `False`.
+* The `sum` function only works when the contents of the container are numbers.
+
+```python
+generic_container = farm_animals
+all(generic_container)
+any(generic_container)
+```
 
