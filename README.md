@@ -11,4 +11,5 @@ The document is available for download [here](https://archive.org/details/comp33
 [**Lesson 02: Variables and Functions**](../master/Lesson_02/)  
 [**Lesson 03: Flow Control**](../master/Lesson_03/)  
 [**Lesson 04: Container Data Types**](../master/Lesson_04/)  
+[**Lesson 05: File Input and Output**](../master/Lesson_05/)
 
