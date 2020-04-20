@@ -12,4 +12,5 @@ The document is available for download [here](https://archive.org/details/comp33
 [**Lesson 03: Flow Control**](../master/Lesson_03/)  
 [**Lesson 04: Container Data Types**](../master/Lesson_04/)  
 [**Lesson 05: File Input and Output**](../master/Lesson_05/)
-
+[**Lesson 06: Development Environment and Tooling**](../master/Lesson_06/)
+[**Lesson 07: Object Orienteering: Using Classes**](../master/Lesson_07/)
