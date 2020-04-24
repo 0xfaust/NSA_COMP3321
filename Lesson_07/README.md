@@ -39,3 +39,56 @@ print(nobody.species)
 nobody.talk()
 ```
 It's **very important** to give any method(i.e. function defined in the class) at least one argument, which is almost always called `self`. This is because internally Python translates `nobody.talk()` into something like `Person.talk(nobody)`
+  
+Although we could add a `name` to each instance just after creating it,one at a time, wouldn’t it be nice to assign instance-specific attributes like that when the object is first constructed? The `__init__` function lets us do that. Except for the funny underscores in the name, it's just an ordinary function; we can even give it default arguments.
+
+```python
+class Person(object):
+	species = "Homo sapiens"
+	def __init__(self, name = "Unknown", age = 18):
+		self.name = name
+		self.age = age
+	def talk(self):
+		return "Hello, my name is {}.".format(self.name)
+```
+In Python, it isn't unusual to access attributes of an object directly, unlike some languages (e.g. Java), where that is considered poor form and everything is done through getter and setter methods. This is because in Python, attributes can be added and removed at any time, so the getters and setters might be useless by the time that you want to use them.
+```python
+mark.favorite_color = "green”
+del generic_worker.name
+```
+
+One potential downside is that Python has no real equivalent of *private* data and methods; everyone can see everything. There is a polite *convention*: other developers are *supposed* to treat an attribute as private if its name starts with a single underscore(`_`). And there is also a trick: names that start with two underscores (`__`) are mangled to make them harder to access.  
+The `__init__` method is just one of many that can help your class behave like a full-fledged built-in Python object. To control how your object is printed, implement `__str__`, and to control how it looks as an output from the interactive interpreter, implement `__repr__`. 
+
+```python
+def person_str(self):
+	return "Name:{0}, Age:{1}".format(self.name, self.age)
+Person.__str__ = person_str
+
+def person_repr(self):
+	return "Person('{0}’, {1})".format(self.name, self.age)
+Person.__repr__ = person_repr
+```
+Take a minute to think about what just happened:
+- We added methods to a class after making a bunch of objects, but `every` object in that class was immediately able to use that method.
+- Because they were special methods, we could immediately use built-in Python functions (like `str`) on those objects.
+
+Be careful when implementing special methods. For instance, you might want the default sort of the `Person` class to be based on age. The special method `__lt__(self, other)` will be used by Python in place of the built-in `lt` function, even for sorting. Even though it's easy, this is problematic because it makes objects appear to be equal when they are just of the same age!
+  
+While we've shown examples of adding methods to a class after the fact, note that it is rarely actually done that way in practice. Here we did that just for convenience of not having to re-define the class every time we wanted to create a new method. Normally you would just define all class methods under the class itself. If we were to do so with the `__str__` , `__repr__`, and `__eq__` methods for the `Person` class above, the class would like the below:
+
+```python 
+class Person(object):
+	species = "Homo sapiens"
+	def __init__(self, name = "Unknown", age=18):
+		self.name = name 
+		self.age = age
+	def talk(self):
+		return "Hello, my name is {}.".format(self.name)
+	def __str__(self):
+		return "Name:{0}, Age:{1}”.format(self.name, self.age)
+	def __repr__(self):
+		return "Person(,{0}' ,{l})".format(self.name, self.age)
+	def __eq__(self, other):
+		return self.age == other.age
+```
