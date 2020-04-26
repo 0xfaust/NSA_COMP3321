@@ -92,3 +92,33 @@ class Person(object):
 	def __eq__(self, other):
 		return self.age == other.age
 ```
+
+## Inheritance
+There are many types of people, and each type could be represented by its own class. It would be a pain if we had to reimplement the fundamental `Person` traits in each new class. Thankfully, **inheritance** gives us a way to avoid that. We've already seen how it works: `Person` inherits from (or is a **subclass** of) the `object` class. However, any class can be inherited from (i.e. have *descendants*).
+```python
+class Student(Person):
+	...
+
+```
+An object from the subclass has all the properties of the parent class, along with any additions from its own class definition. You can still easy to override behavior from the parent class easily --just create a method with the same name in the subclass. Using the parent class's behavior in the child class is tricky, but fun, because you have to use the `super` function.
+```python
+class Employee(Person):
+	def talk(self):
+		talk_str = super(Employee, self).talk()
+		return talk_str + "I work for {)".format(self.employer)
+```
+The syntax here is strange at first. The `super` function takes a `class` (i.e. a `type`) as its first argument, and an object descended from that class as its second argument. The object has a chain of ancestor classes. The `super` function goes through that chain and returns the class that is after the one passed as the function's first argument. Therefore, `super` can be used to skip up the chain, passing modifications made in intermediate classes.  As a second, more common (but more complicated) example, it's often useful to add additional properties to subclass objects in the constructor.
+```python
+class Employee(Person):
+	def_init_(self, name, age, employer):
+		super(Employee, self)._init_(name, age)
+		self.employer = employer
+		def talk(self):
+			talk_str = super(Employee, self).talk()
+			return talk_str + "I work for {}".format(self.employer)
+```
+A `class` in Python can have more than one listed ancestor (which is sometimes called *polymorphism*). We won't go into great detail here, aside from pointing out that it exists and is powerful but complicated.
+```python
+class StudentEmployee(Student, Employee):
+	pass
+```
