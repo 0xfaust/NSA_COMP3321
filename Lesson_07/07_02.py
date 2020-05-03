@@ -26,12 +26,12 @@ class Query():
         return "Mark {0} used for {1} associated with address: {2}.".format(self.mark, self.desc, self.email)
 
 class RangedQuery(Query):
-    def __init__(self, mark, desk, email, start, end):
+    def __init__(self, mark, desk, email, start=None, end=None):
         super(RangedQuery, self).__init__(mark, desk, email)
         self.start = start
         self.end = end
     def __str__(self):
-        return super(Query, self).__str__() + " starting on {0} and ending on {1}".format(self.start, self.end)
+        return super(RangedQuery, self).__str__() + " starting on {0} and ending on {1}".format(self.start, self.end)
 
 query2 = RangedQuery("TS//SI//REL_TO_USA,FVEY", "Primary email address of Zendian diplomat", "10.254.18.162", "2016-12-01", "2016-12-31")
 print(query2)
